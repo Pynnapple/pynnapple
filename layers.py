@@ -23,4 +23,3 @@ class Dense:
         assert len(input_tensor.shape) == 2 
 
         return self.W.T.dot(input_tensor) + self.B
-``
