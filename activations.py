@@ -18,6 +18,9 @@ def softmax(x):             #Softmax Activation
     e_x = np.exp(x)
     return e_x/e_x.sum()
 
+def linear(x):
+    return x 
+
 
 ##### Derivatives #####
 
@@ -36,3 +39,5 @@ def d_ReLU(x, dA):
     dz[x <= 0] = 0 
     return dz
 
+def d_linear(x, dA):
+    return dA 
