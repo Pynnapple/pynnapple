@@ -12,7 +12,7 @@ def softsign(x):            #SoftSign Activation
     return x/(1 + abs(x))
 
 def ReLU(x):                #Relu Activation
-    return x * (x > 0.0)
+    return np.maximum(0, x)
 
 def softmax(x):             #Softmax Activation
     e_x = np.exp(x)
@@ -21,16 +21,18 @@ def softmax(x):             #Softmax Activation
 
 ##### Derivatives #####
 
-def d_sigmoid(x):
-    return sigmoid(x)*(1-sigmoid(x))
+def d_sigmoid(x, dA):
+    s = sigmoid(x)
+    return dA*s*(1-s) 
 
-def d_tanh(x):
-    return 1 - tanh(x)**2  
+def d_tanh(x, dA):
+    return dA*(1 - tanh(x)**2)  
 
-def d_softsign(x):
-    return 1/((1 + abs(x))**2)
+def d_softsign(x, dA):
+    return dA/((1 + abs(x))**2)
 
-def d_ReLU(x):
-    return 1 * (x > 0.0)
+def d_ReLU(x, dA):
+    dz = dA.copy()
+    dz[x <= 0] = 0 
+    return dz
 
-    
