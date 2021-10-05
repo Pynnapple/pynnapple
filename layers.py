@@ -1,13 +1,28 @@
 import numpy as np 
+import activations as ac 
 
 class Dense:
-    def __init__(self, units, input_shape = None, activation = None):
+    def __init__(self, units, input_shape = None, activation = "linear"):
         self.units = units
         
         self.input_shape = input_shape 
         self.output_shape = (units, 1)
 
-        self.activation = activation 
+        self.assign_activation()
+
+    def assign_activation(self, activation):
+        if activation == "linear":
+            self.activation = ac.linear
+            self.activGrad = ac.d_linear 
+        elif activation == "sigmoid":
+            self.activation = ac.sigmoid 
+            self.activGrad = ac.d_sigmoid 
+        elif activation == "tanh":
+            self.activation = ac.tanh 
+            self.activGrad = ac.d_tanh 
+        elif activation == "relu":
+            self.activation = ac.ReLU
+            self.activGrad = ac.d_ReLU         
 
     def init_params(self):
         self.W = np.random.rand(self.input_shape[0], self.units)      #Layer Weight Initializing
